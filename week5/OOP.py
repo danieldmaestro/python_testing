@@ -57,8 +57,5 @@ class PrivateClass:
 
 my_object = PrivateClass()
 
-print(my_object.public_data)
-print(my_object.__private_data)
-
-
-
+# print(my_object.public_data)
+# print(my_object.__private_data)

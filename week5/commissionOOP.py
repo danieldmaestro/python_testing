@@ -74,7 +74,7 @@ class SalariedCommissionEmployee(CommissionEmployee):
         return ("Salaried" + super().__repr__() +
                 f"\nBase Salary: {self.base_salary:.2f}")
 
-s = SalariedCommissionEmployee("Daniel", "Maestro", "223457890", 1122000.40, 0.09, 30000)
+s = SalariedCommissionEmployee("Daniel", "Maestro", "223457890", 1122000.40, 0.09, -4)
 c = CommissionEmployee("Busola", "Adeyeye", "225657890", 1122000.40, 0.09)
 
 # employees = [c,s]
