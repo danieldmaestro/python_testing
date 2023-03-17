@@ -1,0 +1,27 @@
+{% extends "basic_app/base.html" %}
+{% block body_block %}
+
+<div class="bg-light p-5 rounded-lg m-3">
+{% if registered %}
+<h1> Thank you for registering! </h1>
+{% else %}
+  <h1 class="display-4">Register Here!</h1>
+  <hr class="my-4">
+  <h3>Fill out the form: </h3>
+  
+  <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ user_form.as_p}}
+    {{ profile_form.as_p }}
+    <input type="submit" value="Register">
+  </form>
+
+
+
+{% endif %}
+
+  <hr class="my-4">
+  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+</div>
+
+{% endblock %}
