@@ -1,5 +1,8 @@
+from random import choice
+import string
 from csv_logger import CsvLogger
 import logging
+from staff import Staff
 
 filename = "logs.csv"
 delimiter = ','
@@ -22,43 +25,39 @@ csvlogger = CsvLogger(filename=filename,
                       max_files=max_files,
                       header=header)
 
-class Staff:
-    def __init__(self, f_name:str, l_name:str, username:str, password:str, suspension_status="not_suspended", default_p = "not_changed"):
+class Admin:
+    def __init__(self, f_name, l_name, username, password):
         self.f_name = f_name
         self.l_name = l_name
-        self.password = password
-        self.username = username
         self.full_name = self.f_name + " " + self.l_name
-        self.is_suspended = suspension_status
+        self.username = username
+        self.password = password
         self.is_loggedin = False
-        self.default_p = default_p
 
-    def customer_deposit(self, currency, amount, wallet_name, customer):
-        customer.get_wallet(currency, wallet_name).deposit(amount)
+    def create_staff(self, f_name, l_name, username, password =''.join((choice(string.ascii_letters) for i in range(8)))):
+        print(f"New Staff Created. Your default password is {password}")
+        return Staff(f_name, l_name, username, password)
 
-    def setpassword(self, new_password):
-        self.password = new_password
-        self.default_p = "changed"
+    def suspension(self, staff):
+        staff.is_suspended = "suspended"
+        print(f"{staff.f_name} is hereby suspended.")
+
+    def end_suspension(self, staff):
+        staff.is_suspended = "not_suspended"
+        print(f"Dear {staff.f_name}, your suspension status has been lifted.")
 
     def login(self, username, password):
-        if self.is_suspended == "not_suspended":
-            if username == self.username and password == self.password:
-                self.is_loggedin = True
-                print("You have successfully logged in.")
-                csvlogger.staff([self.full_name, "LOGIN", "NIL"])
-            else:
-                print("Wrong credentials. Try again")
+        if username == self.username and password == self.password:
+            self.is_loggedin = True
+            print("You have successfully logged in.")
+            csvlogger.admin([self.full_name, "LOGIN", "NIL"])
         else:
-            print("You are currently suspended. Refer to admin.")
-            
+            print("Wrong credentials. Try again")
 
     def logout(self):
         if self.is_loggedin:
             self.is_loggedin = False
             print("You have successfully logged out.")
-            csvlogger.staff([self.full_name, "LOGOUT", "NIL"])
+            csvlogger.admin([self.full_name, "LOGOUT", "NIL"])
         else:
             print("You have to be logged in to log out.")
-
-    def __str__(self):
-        return self.full_name

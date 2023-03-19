@@ -9,3 +9,7 @@ class CustomerDatabase:
 
     def get_customer(self, customer_email):
         return self._customers[customer_email]
+    
+    def all_customers(self):
+        for customer in self._customers.values():
+            print(customer)
