@@ -6,7 +6,7 @@ import logging
 filename = "logs.csv"
 delimiter = ','
 level = logging.INFO
-custom_additional_levels = ['customer', 'wallet', 'staff', 'admin']
+custom_additional_levels = ['customer']
 fmt = f'%(asctime)s{delimiter}%(levelname)s{delimiter}%(message)s'
 datefmt = '%Y/%m/%d %H:%M:%S'
 max_size = 10240  # 1 megabyte
