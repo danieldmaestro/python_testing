@@ -6,15 +6,23 @@ class Word:
         self.__word = word
         self.temp_word = word
         self.word_blank = "_" * len(word)
-        self._tries = 8
+        self.__tries = 8
 
     @property
     def word(self):
-        return self._word
+        return self.__word
+    
+    @property
+    def tries(self):
+        return self.__tries
+    
+    @tries.setter
+    def tries(self, value):
+        self.__tries = value
     
     @property
     def word_len(self):
-        return len(self._word)
+        return len(self.__word)
 
     def hang_play(self, letter: str):
         self.tries -= 1
