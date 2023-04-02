@@ -4,7 +4,7 @@
 <form class="post_form" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Post Comment</button>
+    <button type="submit" class="save btn btn-secondary">Post Comment</button>
 </form>
 <script>
     var editor = new MediumEditor('.editable');

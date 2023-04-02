@@ -8,17 +8,17 @@
         {{post.published_date}}
     </div>
 {% else %}
-    <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-default">Publish</a>
+    <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-secondary">Publish</a>
 {% endif %}
 
-<p class="postcontent">{{ post.title|safe|linebreaksbr }}</p>
+<p class="postcontent">{{ post.text|safe|linebreaksbr }}</p>
 
 {% if user.is_authenticated %}
     <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
+        <i class="fa-solid fa-pen-to-square"></i>
     </a>
-    <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
-        <span class="glyphicon glyphicon-remove"></span>
+    <a href="{% url 'post_remove' pk=post.pk %}" class="btn btn-primary">
+        <i class="fa-sharp fa-solid fa-xmark"></i>
     </a>
 {% endif%}
 
@@ -26,17 +26,17 @@
 
 <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add Comment</a>
 
-<div class="container-fluid">
-    {% for comment in post.comment.all %}
+<div class="container">
+    {% for comment in post.comments.all %}
     <br>
     {% if user.is_authenticated or comment.approved_comment %}
         {{comment.create_date }}
         {% if not comment.approved_comment %}
-            <a href="{% url 'comment_remove' pk=comment.pk %}" class="btn btn-default">
-                <span class="glyphicon glyphicon-remove"></span>
+            <a href="{% url 'comment_remove' pk=comment.pk %}" class="btn btn-secondary">
+                <i class="fa-sharp fa-solid fa-xmark"></i>
             </a>
             <a href="{% url 'comment_approve' pk=comment.pk %}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-ok"></span>
+                <i class="fa-solid fa-check"></i>
             </a>
         {% endif %}
 
